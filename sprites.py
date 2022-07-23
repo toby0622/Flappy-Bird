@@ -38,6 +38,8 @@ class Ground(pygame.sprite.Sprite):
         # Position
         self.rect = self.image.get_rect(bottomleft=(0, WINDOW_HEIGHT))
         self.position = pygame.math.Vector2(self.rect.topleft)
+        # Mask
+        self.mask = pygame.mask.from_surface(self.image)
 
     def update(self, dt):
         self.position.x -= 360 * dt
@@ -61,6 +63,8 @@ class Plane(pygame.sprite.Sprite):
         # Movement
         self.gravity = 600
         self.direction = 0
+        # Mask
+        self.mask = pygame.mask.from_surface(self.image)
 
     def import_frames(self, scale_factor):
         self.frames = []
@@ -89,6 +93,8 @@ class Plane(pygame.sprite.Sprite):
     def rotate(self):
         rotated_plane = pygame.transform.rotozoom(self.image, -self.direction * 0.06, 1)
         self.image = rotated_plane
+        # Mask
+        self.mask = pygame.mask.from_surface(self.image)
 
     def update(self, dt):
         self.apply_gravity(dt)
@@ -114,6 +120,7 @@ class Obstacle(pygame.sprite.Sprite):
             self.rect = self.image.get_rect(midtop=(x, y))
 
         self.position = pygame.math.Vector2(self.rect.topleft)
+        self.mask = pygame.mask.from_surface(self.image)
 
     def update(self, dt):
         self.position.x -= 400 * dt
