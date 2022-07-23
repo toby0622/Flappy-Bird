@@ -2,7 +2,7 @@ import pygame
 import sys
 import time
 from settings import *
-from sprites import Background
+from sprites import Background, Ground
 
 
 class Game:
@@ -20,6 +20,7 @@ class Game:
         self.scale_factor = WINDOW_HEIGHT / background_height
         # Sprite Setup
         Background(self.all_sprites, self.scale_factor)
+        Ground(self.all_sprites, self.scale_factor)
 
     def run(self):
         last_time = time.time()
